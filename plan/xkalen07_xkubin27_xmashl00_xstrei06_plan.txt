@@ -1,15 +1,18 @@
+Cíl:
+    Ubuntu 20.04
+
 Termíny:
 	18.3. Založení repositáře - xkalen07
 	8.4.  Testy pro matematickou knihovnu - xstrei06 xmashl00
 	17.4. Matematická knihovna - kubin27
 	20.4. GUI - xkalen07
-  21.4. Screenshot debuggeru - xkalen07
+  	21.4. Screenshot debuggeru - xkalen07
 	22.4. Makefile - xkalen07 xstrei06 xkubin27 xmashl00
-  24.4. Dokumentace - xstrei06
+  	24.4. Dokumentace - xstrei06
 	25.4. Profiling - xmashl00
 	27.4. Mockupy - xkalen07 xstrei06 xkubin27 xmashl00
 	29.4. Odevzdání projektu - xkalen07
-  21.5. Hodnocení - xkalen07 xstrei06 xkubin27 xmashl00
+  	21.5. Hodnocení - xkalen07 xstrei06 xkubin27 xmashl00
 
 Komunikační kanály a pravidla:
 	- GitHub: main větev je chráněná
