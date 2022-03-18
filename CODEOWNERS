@@ -1,2 +1,3 @@
 .py @jkalend
-.txt @jkalend
+*.txt @jkalend
+*.md @jkalend
