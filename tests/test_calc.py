@@ -140,5 +140,57 @@ class TestCalc(unittest.TestCase):
         self.assertRaises(ValueError, calc.eval_str, "-2√(17-19)")
         self.assertRaises(ValueError, calc.eval_str, "(124*0-3-(-3))√13")
 
+    def test_addition(self):
+        self.assertEqual(calc.eval_str("0+0"), 0)
+        self.assertEqual(calc.eval_str("0+7"), 7)
+        self.assertEqual(calc.eval_str("1+2"), 3)
+        self.assertEqual(calc.eval_str("(-5)+3"), -2)
+        self.assertEqual(calc.eval_str("(-6)+(-13)"), -19)
+
+        self.assertAlmostEqual(calc.eval_str("0+0.4"), 0.4)
+        self.assertAlmostEqual(calc.eval_str("2.5+3.78"), 6.28)
+        self.assertAlmostEqual(calc.eval_str("(-1.8)+13"), 11.2)
+        self.assertAlmostEqual(calc.eval_str("(-0.67)+(-9.3)"), -9.97)
+
+    def test_substraction(self):
+        self.assertEqual(calc.eval_str("0-0"), 0)
+        self.assertEqual(calc.eval_str("1-0"), 1)
+        self.assertEqual(calc.eval_str("0-7"), -7)
+        self.assertEqual(calc.eval_str("19-6"), 13)
+        self.assertEqual(calc.eval_str("97-135"), -38)
+        self.assertEqual(calc.eval_str("(-15)-8"), -23)
+        self.assertEqual(calc.eval_str("((-24)-(-17)"), -7)
+
+        self.assertAlmostEqual(calc.eval_str("0-0.875"), -0.875)
+        self.assertAlmostEqual(calc.eval_str("3.6-1.5"), 2.1)
+        self.assertAlmostEqual(calc.eval_str("(-4.681)-3.751"), -8.432)
+        self.assertAlmostEqual(calc.eval_str("(-0.3789)-(-9.84)"), 9.4611)
+
+    def test_multiplication(self):
+        self.assertEqual(calc.eval_str("0*5"), 0)
+        self.assertEqual(calc.eval_str("7*18"), 126)
+        self.assertEqual(calc.eval_str("(-3)*8"), -24)
+        self.assertEqual(calc.eval_str("(-12)*(-4)"), 48)
+
+        self.assertAlmostEqual(calc.eval_str("0.5*3"), 1.5)
+        self.assertAlmostEqual(calc.eval_str("0.25*6.37"), 1.5925)
+        self.assertAlmostEqual(calc.eval_str("(-0.84)*3.7"), -3.108)
+        self.assertAlmostEqual(calc.eval_str("(-11.25)*(-1.25)"), 14.0625)
+
+    def test_division(self):
+        self.assertEqual(calc.eval_str("2/2"), 1)
+        self.assertEqual(calc.eval_str("(-25)/5"), -5)
+        self.assertEqual(calc.eval_str("(-18)/(-6)"), 3)
+        
+        self.assertAlmostEqual(calc.eval_str("0.3/12"), 0.025)
+        self.assertAlmostEqual(calc.eval_str("(-1.27)/9"), -0.1411111111)
+        self.assertAlmostEqual(calc.eval_str("4.5/6.3"), 0.7142857143)
+        self.assertAlmostEqual(calc.eval_str("(-2.5)/(-4)"), 0.625)
+        self.assertAlmostEqual(calc.eval_str("2/5"), 0.4)
+        self.assertAlmostEqual(calc.eval_str("(-27)/6"), -4.5)
+        self.assertAlmostEqual(calc.eval_str("(-14)/(-93)"), 0.1505376344)
+
+        self.assertRaises(ValueError, calc.eval_str, "18/0")
+
 if __name__ == '__main__':
     unittest.main()
