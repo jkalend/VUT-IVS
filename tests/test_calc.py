@@ -8,6 +8,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("(-0)!"), 1)
         self.assertEqual(calc.eval_str("3!"), 6)
         self.assertEqual(calc.eval_str("5!"), 120)
+        self.assertEqual(calc.eval_str("-5!"), -120)
         self.assertEqual(calc.eval_str("13!"), 6227020800)
         self.assertEqual(calc.eval_str("7.0!"), 5040)
 
@@ -36,12 +37,13 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("189080341243102090^0"), 1)
 
         self.assertAlmostEqual(calc.eval_str("1.7^5"), 14.19857)
-        self.assertAlmostEqual(calc.eval_str("-1.7^5"), -14.19857)
+        self.assertAlmostEqual(calc.eval_str("(-1.7)^5"), -14.19857)
         self.assertAlmostEqual(calc.eval_str("1.7^-5"), 0.070429628)
         self.assertAlmostEqual(calc.eval_str("0.05^3"), 0.000125)
         self.assertAlmostEqual(calc.eval_str("12.34^3"), 1879.080904)
-        self.assertAlmostEqual(calc.eval_str("(-1.7)^2"), -2.89)
-        self.assertAlmostEqual(calc.eval_str("-3.14159265^4"), 97.40909059)
+        self.assertAlmostEqual(calc.eval_str("(-1.7)^2"), 2.89)
+        self.assertAlmostEqual(calc.eval_str("-1.7^2"), -2.89)
+        self.assertAlmostEqual(calc.eval_str("-3.14159265^4"), -97.40909059)
         self.assertAlmostEqual(calc.eval_str("2,71828182846^6"), 403.4287935)
 
         self.assertRaises(ValueError, calc.eval_str, "0^-5")
@@ -53,10 +55,8 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("2√4"), 2)
         self.assertEqual(calc.eval_str("002√4"), 2)
         self.assertEqual(calc.eval_str("3√8"), 2)
-        self.assertEqual(calc.eval_str("3√8"), 2)
         self.assertEqual(calc.eval_str("7√16384"), 4)
         self.assertEqual(calc.eval_str("6√0"), 0)
-        self.assertEqual(calc.eval_str("7√-0"), 0)
         self.assertEqual(calc.eval_str("231√0"), 0)
         self.assertEqual(calc.eval_str("√1"), 1)
         self.assertEqual(calc.eval_str("3424√1"), 1)
@@ -78,18 +78,20 @@ class TestCalc(unittest.TestCase):
         self.assertAlmostEqual(calc.eval_str("12.71√36"), 1.325705594)
         self.assertAlmostEqual(calc.eval_str("3.14159265√3.14159265"), 1.439619496)
 
-        self.assertAlmostEqual(calc.eval_str("-3√4"), 0.6299605249)
-        self.assertAlmostEqual(calc.eval_str("-3√27"), 0.333333333)
-        self.assertAlmostEqual(calc.eval_str("-12√36"), 0.7418363756)
-        self.assertAlmostEqual(calc.eval_str("-1√36"), 0.027777777)
-        self.assertAlmostEqual(calc.eval_str("-7.25√0.456"), 1.114395455)
-        self.assertAlmostEqual(calc.eval_str("-0.01√100.0"), 0)
-        self.assertAlmostEqual(calc.eval_str("-0.73√42.947"), 0.00579569749)
+        self.assertAlmostEqual(calc.eval_str("(-3)√4"), 0.6299605249)
+        self.assertAlmostEqual(calc.eval_str("(-3)√27"), 0.333333333)
+        self.assertAlmostEqual(calc.eval_str("(-12)√36"), 0.7418363756)
+        self.assertAlmostEqual(calc.eval_str("(-1)√36"), 0.027777777)
+        self.assertAlmostEqual(calc.eval_str("(-7.25)√0.456"), 1.114395455)
+        self.assertAlmostEqual(calc.eval_str("(-0.01)√100.0"), 0)
+        self.assertAlmostEqual(calc.eval_str("(-0.73)√42.947"), 0.00579569749)
 
         self.assertRaises(ValueError, calc.eval_str, "0√0")
         self.assertRaises(ValueError, calc.eval_str, "0√-5")
         self.assertRaises(ValueError, calc.eval_str, "6√-13")
         self.assertRaises(ValueError, calc.eval_str, "22√-3.14159265")
+        self.assertRaises(ValueError, calc.eval_str, "7√-5")
+        self.assertRaises(ValueError, calc.eval_str, "3√-0")
 
 
     def test_abs(self):
