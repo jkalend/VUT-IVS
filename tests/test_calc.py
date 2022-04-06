@@ -44,7 +44,7 @@ class TestCalc(unittest.TestCase):
         self.assertAlmostEqual(calc.eval_str("(-1.7)^2"), 2.89)
         self.assertAlmostEqual(calc.eval_str("-1.7^2"), -2.89)
         self.assertAlmostEqual(calc.eval_str("-3.14159265^4"), -97.40909059)
-        self.assertAlmostEqual(calc.eval_str("2,71828182846^6"), 403.4287935)
+        self.assertAlmostEqual(calc.eval_str("2.71828182846^6"), 403.4287935)
 
         self.assertRaises(ValueError, calc.eval_str, "0^-5")
         self.assertRaises(ValueError, calc.eval_str, "0^-1.723")
@@ -90,8 +90,8 @@ class TestCalc(unittest.TestCase):
         self.assertRaises(ValueError, calc.eval_str, "0√-5")
         self.assertRaises(ValueError, calc.eval_str, "6√-13")
         self.assertRaises(ValueError, calc.eval_str, "22√-3.14159265")
-        self.assertRaises(ValueError, calc.eval_str, "7√-5")
-        self.assertRaises(ValueError, calc.eval_str, "3√-0")
+        self.assertAlmostEqual(calc.eval_str("7√-5"), -1.25849895) 
+        self.assertEqual(calc.eval_str("3√-0"), 0)
 
 
     def test_abs(self):
@@ -112,7 +112,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("2+(27/18)"), 3.5)
         self.assertEqual(calc.eval_str("(2+7*13)"), 93)
         self.assertEqual(calc.eval_str("2+27/18"), 3.5)
-        self.assertEqual(calc.eval_str("(15-5)/5)"), 2)
+        self.assertEqual(calc.eval_str("((15-5)/5)"), 2)
         self.assertEqual(calc.eval_str("15-(5/5)"), 14)
         self.assertEqual(calc.eval_str("15-5/5"), 14)
         self.assertEqual(calc.eval_str("21-(4+6*5)"), -13)
@@ -126,11 +126,11 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("-(2^3)!"), -40320)
         self.assertEqual(calc.eval_str("-(2^4!)"), -16777216)
         self.assertEqual(calc.eval_str("-(|-(2^3)|!)"), -40320)
-        self.assertEqual(calc.eval_str("(|-2^3)|)!"), 40320)
+        self.assertEqual(calc.eval_str("(|-2^3|)!"), 40320)
         self.assertEqual(calc.eval_str("|-(2^3)|!"), 40320)
-        self.assertEqual(calc.eval_str("|-(2^3)|!)"), 40320)
+        self.assertEqual(calc.eval_str("(|-(2^3)|!)"), 40320)
         self.assertAlmostEqual(calc.eval_str("(7-3)√64*5/3!"), 2.357022604)
-        self.assertAlmostEqual(calc.eval_str("7-(-3√(64*5))/3!"), 6.975633186)
+        self.assertAlmostEqual(calc.eval_str("7-(-3√(64*5))/3!"), 8.139983964)
         self.assertAlmostEqual(calc.eval_str("7√((64*√5)/3!)/(5√17)"), 0.8926842879)
         self.assertAlmostEqual(calc.eval_str("7√(13^2.3)*(5/3)√17-6^(3√9)+3"), -25.84075382)
         self.assertEqual(calc.eval_str("9-(2-6)^(9/3)+1*(1-5)"), 69)
@@ -161,7 +161,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("19-6"), 13)
         self.assertEqual(calc.eval_str("97-135"), -38)
         self.assertEqual(calc.eval_str("(-15)-8"), -23)
-        self.assertEqual(calc.eval_str("((-24)-(-17)"), -7)
+        self.assertEqual(calc.eval_str("((-24)-(-17))"), -7)
 
         self.assertAlmostEqual(calc.eval_str("0-0.875"), -0.875)
         self.assertAlmostEqual(calc.eval_str("3.6-1.5"), 2.1)
