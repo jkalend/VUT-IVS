@@ -150,7 +150,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("-(2^4!)"), -16777216)
         self.assertEqual(calc.eval_str("-(-(-(2^3)))!"), -40320)
         self.assertEqual(calc.eval_str("-(2^4)%4"), 0)
-        self.assertEqual(calc.eval_str("3%-(2+6"), -5)
+        self.assertEqual(calc.eval_str("3%-(2+6)"), -5)
         self.assertEqual(calc.eval_str("(√9%-6)%2"), 1)
         self.assertAlmostEqual(calc.eval_str("(7-3)√64*5/3!"), 2.357022604)
         self.assertAlmostEqual(calc.eval_str("7-(-3√(64*5))/3!"), 8.139983964)
