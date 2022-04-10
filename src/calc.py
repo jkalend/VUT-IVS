@@ -69,7 +69,7 @@ def split_expression(expr):
             else:
                 raise ValueError("MA error: invalid sequence")
 
-        elif x in operators or x == '(' or x == ')':
+        elif x in operators:
             if x == '√' and (len(parsed) == 0 or parsed[-1] in operators and parsed[-1] != ')'):
                 parsed.append("2") # default is square root
             parsed.append(x) 
