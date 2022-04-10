@@ -48,7 +48,6 @@ def exp(x, n):
 def split_expression(expr):
     parsed = []
     operators = ["^", "√", "!", "/", "*", "-", "+", "(", ")", "%"]
-    neg = False
     for x in expr:
         if x.isspace():
             continue
@@ -76,7 +75,6 @@ def split_expression(expr):
 
         else:
             raise ValueError("MA error: unrecognized symbol")
-        neg = False
     return parsed
 
 def eval_substr(parsed, in_expr = False):
