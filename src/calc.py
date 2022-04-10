@@ -148,6 +148,3 @@ def eval_substr(parsed, in_expr = False):
 
 def eval_str(expr):
     return round(eval_substr(split_expression(expr))[0], 10)
-
-print(eval_str("3 / (4 - 3)"))
-print(eval_str("(4 - 5) * 3"))
