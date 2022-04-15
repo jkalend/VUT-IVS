@@ -1,18 +1,33 @@
+
 def mult(a, b):
+    """Multiply two numbers.
+    Return their product"""
     return a * b
 
 def add(a, b):
+    """Add two numbers.
+    Return their sum."""
     return a + b
 
 def sub(a, b):
+    """Substract two numbers.
+    First number is minuend, second is subtrahend.
+    Return their difference."""
     return a - b
 
 def div(a, b):
+    """Divide two number.
+    First number is dividend, second is divisor.
+    Return quotient.
+    Raise an error if divisor is zero.
+    """
     if b == 0:
         raise ValueError("MA ERROR: zero division")
     return a / b
 
 def factorial(a):
+    """Take a single number and return its factorial.
+    Raise an error if the number is negative or not an integer."""
     if a < 0 or int(a) != a:
         raise ValueError("MA ERROR: invalid factorial")
     res = 1
@@ -22,11 +37,20 @@ def factorial(a):
     return res
 
 def mod(a, b):
+    """Divide two numbers.
+    First number is dividend, second is divisor.
+    Return residue of division.
+    Raise an error if divisor is zero or any of the numbers is not an integer.
+    """
     if int(a) != a or int(b) != b or b == 0:
         raise ValueError("MA error: invalid operands")
     return a % b
 
 def root(n, x):
+    """Take two numbers, first one is the index, second is the radicand.
+    Return x^{1/n}.
+    Raise an error if index is zero.
+    Raise an error if index is even while radicand is negative"""
     if n == 0:
         raise ValueError("MA ERROR: zero division")
     if n % 2 == 0:
@@ -41,6 +65,9 @@ def root(n, x):
             return x ** (1.0 / n)
 
 def exp(x, n):
+    """Take two numbers, first is base, second is exponent.
+    Return x^n.
+    Raise an error if the base is zero while the exponent is negative."""
     if x == 0 and n < 0:
         raise ValueError("MA ERROR: zero division")
     return x ** n
