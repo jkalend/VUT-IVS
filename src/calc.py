@@ -16,7 +16,7 @@ def sub(a, b):
     return a - b
 
 def div(a, b):
-    """Divide two number.
+    """Divide two numbers.
     First number is dividend, second is divisor.
     Return quotient.
     Raise an error if divisor is zero.
@@ -73,6 +73,8 @@ def exp(x, n):
     return x ** n
 
 def split_expression(expr):
+    """Split the string representing the mathematical expression to a format required by eval_substr.
+    Raise an error if the string contains operators not recognized by the library."""
     parsed = []
     operators = ["^", "√", "!", "/", "*", "-", "+", "(", ")", "%"]
     for x in expr:
@@ -105,6 +107,10 @@ def split_expression(expr):
     return parsed
 
 def eval_substr(parsed, in_expr = False):
+    """Evaluate parsed representation of input string.
+    Return the result of solving the mathematical expression.
+    Raise an error if the expression cannot be solved."""
+    
     priority = [["("], ["!"],["^", "√"], ['-'], ["%", "/", "*"], ["-", "+"], [")"]] 
     funcs = {"^":exp, "/": div, "*": mult, "-": sub, "+": add, "√" : root, "%": mod}
 
@@ -129,18 +135,12 @@ def eval_substr(parsed, in_expr = False):
                 break
 
             if x == '-' and len(operator) == 1 and x in operator: # sign invert
-                if i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j]:
-                    if i + 1 < len(parsed) and str(parsed[i + 1])[-1].isdigit():
-                        parsed[i] = -float(parsed[i + 1])
-                        parsed[i + 1:] = parsed[i + 2:]
-                        i -= 1
-                    else:
-                        raise ValueError("MA error: invalid operand")
+                if i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j] and str(parsed[i + 1])[-1].isdigit():
+                     parsed[i] = -float(parsed[i + 1])
+                     parsed[i + 1:] = parsed[i + 2:]
+                     i -= 1
 
-            elif x == '!' and x in operator:
-                if i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j]:
-                    raise ValueError("MA error: invalid sequence")
-
+            elif x == '!' and x in operator: 
                 parsed[i - 1] = factorial(float(parsed[i - 1]))
                 parsed[i:] = parsed[i + 1:]
                 i -= 1
@@ -149,18 +149,9 @@ def eval_substr(parsed, in_expr = False):
                 func = funcs[x]
 
             if func != None:
-                if i + 1 >= len(parsed) or i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j]:
-                    raise ValueError("MA error: invalid sequences")
-
                 if parsed[i + 1] == '-':
-                    if i + 2 >= len(parsed) or parsed[i + 2] in [k for j in priority for k in j]:
-                        raise ValueError("MA error: invalid sequence")
-
                     parsed[i + 1] += str(parsed[i + 2])
                     parsed[i + 2:] = parsed[i + 3:]
-                
-                elif parsed[i + 1] in [k for j in priority for k in j]:
-                    raise ValueError("MA error: invalid sequence")
 
                 parsed[i - 1] = func(float(parsed[i - 1]), float(parsed[i + 1]))
                 parsed[i:] = parsed[i + 2:]
@@ -172,4 +163,5 @@ def eval_substr(parsed, in_expr = False):
     return parsed
 
 def eval_str(expr):
+    """Return the final result rounded to 10 decimal places."""
     return round(eval_substr(split_expression(expr))[0], 10)
