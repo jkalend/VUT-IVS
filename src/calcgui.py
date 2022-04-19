@@ -36,10 +36,29 @@ class CalcGridLayout(GridLayout):
                 self.display.text = str(calc.eval_str(calculation))
             except Exception:
                 self.display.text = "MATH ERROR"
+                self.ERR = True
 
     def help(self):
         self.display.text = "HELP"
+        self.ERR = True
 
+    def delete(self):
+        if self.ERR:
+            self.display.text = ""
+            self.ERR = False
+        else:
+            self.display.text = self.display.text[:-1]
+
+    def clear(self):
+        self.display.text = ""
+        self.ERR = False
+
+    def enter(self, text):
+        if self.ERR:
+            self.ERR = False
+            self.display.text = text
+        else:
+            self.display.text += text
 
 # Creating App class
 class CalculatorApp(App):
@@ -74,23 +93,23 @@ class CalculatorApp(App):
 		spacing: 10
 		CustButton:
 			text: "AC"
-			on_press: entry.text = ""
+			on_press: calculator.clear()
 			on_release: entry.focus = True
 		CustButton:
 			text: "DEL"
-			on_press: entry.text = entry.text[:-1]
+			on_press: calculator.delete()
 			on_release: entry.focus = True
 		CustButton:
 			text: "("
-			on_press: entry.text += self.text
+			on_press: calculator.enter("(")
 			on_release: entry.focus = True
 		CustButton:
 			text: ")"
-			on_press: calculator.calculate(entry.text)
+			on_press: calculator.enter(")")
 			on_release: entry.focus = True
 		CustButton:
 			text: "%"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("%")
 			on_release: entry.focus = True
 			
 
@@ -99,69 +118,69 @@ class CalculatorApp(App):
 		spacing: 10
 		CustButton:
 			text: "7"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("7")
 			on_release: entry.focus = True
 		CustButton:
 			text: "8"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("8")
 			on_release: entry.focus = True
 		CustButton:
 			text: "9"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("9")
 			on_release: entry.focus = True
 		CustButton:
 			text: "+"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("+")
 			on_release: entry.focus = True
         CustButton:
 			text: "-"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("-")
 			on_release: entry.focus = True
 
 	BoxLayout:
 		spacing: 10
 		CustButton:
 			text: "4"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("4")
 			on_release: entry.focus = True
 		CustButton:
 			text: "5"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("5")
 			on_release: entry.focus = True
 		CustButton:
 			text: "6"
-			on_press: entry.text += self.text
+            on_press: calculator.enter("6")
 			on_release: entry.focus = True
 		CustButton:
 			text: "*"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("*")
 			on_release: entry.focus = True
         CustButton:
 			text: "/"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("/")
 			on_release: entry.focus = True
 
 	BoxLayout:
 		spacing: 10
 		CustButton:
 			text: "1"
-			on_press: ifentry.text += self.text
+			on_press: calculator.enter("1")
 			on_release: entry.focus = True
 		CustButton:
 			text: "2"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("2")
 			on_release: entry.focus = True
 		CustButton:
 			text: "3"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("3")
 			on_release: entry.focus = True
 		CustButton:
 			text: "^"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("^")
 			on_release: entry.focus = True
         CustButton:
 			text: "√"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("√")
 			on_release: entry.focus = True
 
 	# When equals is pressed pass text in the entry
@@ -170,11 +189,11 @@ class CalculatorApp(App):
 		spacing: 10
 		CustButton:
 			text: "!"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("!")
 			on_release: entry.focus = True
 		CustButton:
 			text: "0"
-			on_press: entry.text += self.text
+			on_press: calculator.enter("0")
 			on_release: entry.focus = True
 		CustButton:
 			text: "="
@@ -182,7 +201,7 @@ class CalculatorApp(App):
 			on_release: entry.focus = True
 		CustButton:
 			text: "."
-			on_press: entry.text += self.text
+			on_press: calculator.enter(".")
 			on_release: entry.focus = True
 		CustButton:
 			text: "HELP"
