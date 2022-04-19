@@ -12,6 +12,9 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(calc.eval_str("13!"), 6227020800)
         self.assertEqual(calc.eval_str("7.0!"), 5040)
 
+        self.assertRaises(ValueError, calc.eval_str, "12425!")
+        self.assertRaises(ValueError, calc.eval_str, "-171!")
+        self.assertRaises(ValueError, calc.eval_str, "171!")
         self.assertRaises(ValueError, calc.eval_str, "(-1)!")
         self.assertRaises(ValueError, calc.eval_str, "3.19!")
         self.assertRaises(ValueError, calc.eval_str, "(-3.0)!")
