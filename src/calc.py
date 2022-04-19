@@ -103,7 +103,7 @@ def split_expression(expr):
             parsed.append(x) 
 
         else:
-            raise ValueError("MA error: unrecognized symbol")
+            raise TypeError("MA error: unrecognized symbol")
     return parsed
 
 def eval_substr(parsed, in_expr = False):
