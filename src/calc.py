@@ -164,4 +164,4 @@ def eval_substr(parsed, in_expr = False):
 
 def eval_str(expr):
     """Return the final result rounded to 10 decimal places."""
-    return round(eval_substr(split_expression(expr))[0], 10)
+    return round(float(eval_substr(split_expression(expr))[0]), 10)
