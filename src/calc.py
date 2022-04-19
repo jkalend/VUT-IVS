@@ -28,7 +28,7 @@ def div(a, b):
 def factorial(a):
     """Take a single number and return its factorial.
     Raise an error if the number is negative or not an integer."""
-    if a < 0 or int(a) != a:
+    if a < 0 or a > 170 or int(a) != a:
         raise ValueError("MA ERROR: invalid factorial")
     res = 1
     while a:
