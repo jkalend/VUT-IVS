@@ -1,5 +1,7 @@
 # usr/bin/python
 
+# priority = [["("], ["!"],["^", "√"], ['-'], ["%", "/", "*"], ["-", "+"], [")"]]
+
 # import kivy module
 import kivy
 
@@ -17,7 +19,7 @@ from kivy.config import Config
 
 from kivy.lang import Builder
 
-from calc import eval_str
+import calc
 
 # Setting size to resizable
 Config.set('graphics', 'resizable', 1)
@@ -29,10 +31,14 @@ class CalcGridLayout(GridLayout):
     # Function called when "=" is pressed
     def calculate(self, calculation):
         if calculation:
+            #self.display.text = calc.eval_str(calculation)
             try:
-                self.display.text = eval_str(calculation)
+                self.display.text = str(calc.eval_str(calculation))
             except Exception:
                 self.display.text = "MATH ERROR"
+
+    def help(self):
+        self.display.text = "HELP"
 
 
 # Creating App class
@@ -63,6 +69,30 @@ class CalculatorApp(App):
 			font_size: 32
 			multiline: False
 			focus: True
+    
+    BoxLayout:
+		spacing: 10
+		CustButton:
+			text: "AC"
+			on_press: entry.text = ""
+			on_release: entry.focus = True
+		CustButton:
+			text: "DEL"
+			on_press: entry.text = entry.text[:-1]
+			on_release: entry.focus = True
+		CustButton:
+			text: "("
+			on_press: entry.text += self.text
+			on_release: entry.focus = True
+		CustButton:
+			text: ")"
+			on_press: calculator.calculate(entry.text)
+			on_release: entry.focus = True
+		CustButton:
+			text: "%"
+			on_press: entry.text += self.text
+			on_release: entry.focus = True
+			
 
 	# When buttons are pressed update the entry
 	BoxLayout:
@@ -83,6 +113,10 @@ class CalculatorApp(App):
 			text: "+"
 			on_press: entry.text += self.text
 			on_release: entry.focus = True
+        CustButton:
+			text: "-"
+			on_press: entry.text += self.text
+			on_release: entry.focus = True
 
 	BoxLayout:
 		spacing: 10
@@ -99,7 +133,11 @@ class CalculatorApp(App):
 			on_press: entry.text += self.text
 			on_release: entry.focus = True
 		CustButton:
-			text: "-"
+			text: "*"
+			on_press: entry.text += self.text
+			on_release: entry.focus = True
+        CustButton:
+			text: "/"
 			on_press: entry.text += self.text
 			on_release: entry.focus = True
 
@@ -118,7 +156,11 @@ class CalculatorApp(App):
 			on_press: entry.text += self.text
 			on_release: entry.focus = True
 		CustButton:
-			text: "*"
+			text: "^"
+			on_press: entry.text += self.text
+			on_release: entry.focus = True
+        CustButton:
+			text: "√"
 			on_press: entry.text += self.text
 			on_release: entry.focus = True
 
@@ -127,7 +169,7 @@ class CalculatorApp(App):
 	BoxLayout:
 		spacing: 10
 		CustButton:
-			text: "AC"
+			text: "!"
 			on_press: entry.text = ""
 			on_release: entry.focus = True
 		CustButton:
@@ -139,8 +181,12 @@ class CalculatorApp(App):
 			on_press: calculator.calculate(entry.text)
 			on_release: entry.focus = True
 		CustButton:
-			text: "/"
+			text: "."
 			on_press: entry.text += self.text
+			on_release: entry.focus = True
+		CustButton:
+			text: "HELP"
+			on_press: calculator.help()
 			on_release: entry.focus = True
 
 """)
