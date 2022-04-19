@@ -27,11 +27,11 @@ Config.set('graphics', 'resizable', 1)
 
 # Creating Layout class
 class CalcGridLayout(GridLayout):
+    ERR = False
 
     # Function called when "=" is pressed
     def calculate(self, calculation):
         if calculation:
-            #self.display.text = calc.eval_str(calculation)
             try:
                 self.display.text = str(calc.eval_str(calculation))
             except Exception:
@@ -145,7 +145,7 @@ class CalculatorApp(App):
 		spacing: 10
 		CustButton:
 			text: "1"
-			on_press: entry.text += self.text
+			on_press: ifentry.text += self.text
 			on_release: entry.focus = True
 		CustButton:
 			text: "2"
@@ -170,7 +170,7 @@ class CalculatorApp(App):
 		spacing: 10
 		CustButton:
 			text: "!"
-			on_press: entry.text = ""
+			on_press: entry.text += self.text
 			on_release: entry.focus = True
 		CustButton:
 			text: "0"
