@@ -85,14 +85,15 @@ def split_expression(expr):
     Raise an error if the string contains operators not recognized by the library."""
     parsed = []
     operators = ["^", "√", "!", "/", "*", "-", "+", "(", ")", "%"]
+    digits = [str(x) for x in range(10)]
     for x in expr:
         if x.isspace():
             continue
 
-        elif x.isdigit():
+        elif x in digits:
             if not len(parsed):
                 parsed.append(x)
-            elif parsed[-1][-1].isdigit() or '.' in parsed[-1]:
+            elif parsed[-1][-1] in digits or '.' in parsed[-1]:
                 parsed[-1] += x
             else:
                 parsed.append(x)
@@ -100,13 +101,13 @@ def split_expression(expr):
         elif x == '.':
             if not len(parsed):
                 raise ValueError("MA error: invalid operator")
-            elif parsed[-1][-1].isdigit() and '.' not in parsed[-1]:
+            elif parsed[-1][-1] in digits and '.' not in parsed[-1]:
                 parsed[-1] += x
             else:
                 raise ValueError("MA error: invalid sequence")
 
         elif x in operators:
-            if x == '√' and (len(parsed) == 0 or parsed[-1] in operators and parsed[-1] != ')'):
+            if x == '√' and (len(parsed) == 0 or parsed[-1] in operators and parsed[-1] != ')' and parsed[-1] != '√'):
                 parsed.append("2")    # default is square root
             parsed.append(x) 
 
