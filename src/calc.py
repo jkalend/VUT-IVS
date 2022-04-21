@@ -121,7 +121,7 @@ def eval_substr(parsed, in_expr=False):
     Return the result of solving the mathematical expression.
     Raise an error if the expression cannot be solved."""
     
-    priority = [["("], ["!"], ["^", "√"], ['-'], ["%", "/", "*"], ["-", "+"], [")"]]
+    priority = [["("], ["!"], ["^", "√"], ['-x', '+x'], ["%", "/", "*"], ["-", "+"], [")"]]
     funcs = {"^": exp, "/": div, "*": mult, "-": sub, "+": add, "√": root, "%": mod}
 
     for operator in priority:
@@ -144,9 +144,9 @@ def eval_substr(parsed, in_expr=False):
                     in_expr = False
                 break
 
-            if x == '-' and len(operator) == 1 and x in operator:    # sign invert
-                if i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j] and str(parsed[i + 1])[-1].isdigit():
-                    parsed[i] = -float(parsed[i + 1])
+            if operator == ['-x', '+x'] and x in ['-', '+']:    # sign invert
+                if i - 1 < 0 or parsed[i - 1] in [k for j in priority for k in j] and str(parsed[i + 1])[-1].isdigit(): 
+                    parsed[i] = -float(parsed[i + 1]) if x == '-' else float(parsed[i + 1])
                     parsed[i + 1:] = parsed[i + 2:]
                     i -= 1
 
@@ -159,7 +159,7 @@ def eval_substr(parsed, in_expr=False):
                 func = funcs[x]
 
             if func is not None:
-                if parsed[i + 1] == '-':
+                if parsed[i + 1] in ['-', '+']:
                     parsed[i + 1] += str(parsed[i + 2])
                     parsed[i + 2:] = parsed[i + 3:]
 
