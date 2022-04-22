@@ -41,6 +41,9 @@ class CalcGridLayout(GridLayout):
             except ValueError:
                 self.display.text = "MATH ERROR"
                 self.ERR = True
+            except Exception:
+                self.display.text = "INVALID INPUT"
+                self.ERR = True
 
     # Function called when "AC" button is pressed
     def clear(self):

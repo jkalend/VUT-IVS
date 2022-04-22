@@ -1,5 +1,9 @@
 import unittest
-import calc
+# import sys
+# sys.path.append('../')
+
+# import src.calc as calc
+
 
 class TestCalc(unittest.TestCase):
 
