@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "removing configuartion files"
+rm -f ~/.local/share/applications/calc_launcher.desktop
+echo "done"
