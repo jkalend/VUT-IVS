@@ -2,4 +2,6 @@
 
 echo "removing configuartion files"
 rm -f ~/.local/share/applications/calc_launcher.desktop
+rm -f "install"
+rm -f "uninstall"
 echo "done"

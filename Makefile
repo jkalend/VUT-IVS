@@ -2,20 +2,26 @@ IPT = python3
 ARCHIVE =xlogin# add archive name
 
 .PHONY: all run test profile pack clean clear help doc
-.SILENT: help clean
+.SILENT: help clean all
 all:
-	chmod +x install/install
-	chmod +x install/uninstall
-	
-run: calcgui.py
-	$(IPT) calcgui.py
+	#chmod +x installer/install
+	#echo "chmod +x install/install"
+	#chmod +x installer/uninstall
+	#echo "chmod +x install/uninstall"
+	ln  ./installer/install
+	ln  ./installer/uninstall
+	#echo "run installation script from the install directory using ./install"
+	#echo "uninstall the application using the uninstall script in the same directory using ./uninstall"
 
-test: test_calc.py
-	$(IPT) test_calc.py 
+run: src/calcgui.py
+	$(IPT) src/calcgui.py
+
+test: src/test_calc.py
+	$(IPT) src/test_calc.py
 
 #TODO -- fix profiling target 
 profile: profiling.py
-	$(IPT) profiling.py > ../profiling/profile.txt
+	$(IPT) profiling.py > profiling/profile.txt
 	
 # TODO -- add target for generating doc
 doc:
@@ -38,5 +44,6 @@ packfiles:
 	
 clear: clean
 clean:
+	rm install uninstall
 	rm -rf __pycache__ __init__.py 
 	

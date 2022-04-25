@@ -11,7 +11,7 @@ fi
 echo "creating application launcher..."
 launcher="calc_launcher"
 work_dir=$(pwd)
-dir="$work_dir/../repo/src"
+dir="$work_dir/src"
 icon="button.png"
 encoding="UTF-8"
 executable="calcgui.py"
@@ -32,6 +32,8 @@ echo "Terminal = $terminal" >> $launcher.desktop
 echo "Comment = $comment" >> $launcher.desktop
 
 mv $launcher.desktop ~/.local/share/applications/
+
+echo "$dir"
 
 printf "Launch application? [y/n] "
 read ans
