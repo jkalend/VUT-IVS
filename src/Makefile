@@ -3,9 +3,9 @@ ARCHIVE =xlogin# add archive name
 
 .PHONY: all run test profile pack clean clear help doc
 .SILENT: help clean
-all:
-	chmod +x install/install
-	chmod +x install/uninstall
+all: help
+	chmod +x install
+	chmod +x uninstall
 	
 run: calcgui.py
 	$(IPT) calcgui.py
@@ -18,8 +18,8 @@ profile: profiling.py
 	$(IPT) profiling.py > ../profiling/profile.txt
 	
 # TODO -- add target for generating doc
-doc:
-#	?????
+doc: calc.py
+	pydoc -w calc
 
 help:
 	echo "run installation script from the install directory using ./install"
@@ -38,5 +38,5 @@ packfiles:
 	
 clear: clean
 clean:
-	rm -rf __pycache__ __init__.py 
+	rm -rf __pycache__ __init__.py calc.html
 	
