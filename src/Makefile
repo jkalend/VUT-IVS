@@ -17,7 +17,7 @@ test: test_calc.py
 profile: profiling.py
 	$(IPT) profiling.py > ../profiling/profile.txt
 	
-# TODO -- add target for generating doc
+
 doc: calc.py
 	pydoc -w calc
 
@@ -29,7 +29,7 @@ help:
 pack: packfiles 
 packfiles:
 	cd ../ && mkdir -p $(ARCHIVE) && cd $(ARCHIVE) && mkdir -p doc install repo
-#	mv *.html ../$(ARCHIVE)/doc/ --assuming all generated documentation is .html (i have no idea)
+	mv *.html ../$(ARCHIVE)/doc/ #--assuming all generated documentation is .html (i have no idea)
 	cp install uninstall ../$(ARCHIVE)/install/ 
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
 	cd ../$(ARCHIVE) && zip -r ../$(ARCHIVE) doc repo install
