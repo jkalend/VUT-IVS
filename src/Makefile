@@ -31,6 +31,7 @@ packfiles:
 	cd ../ && mkdir -p $(ARCHIVE) && cd $(ARCHIVE) && mkdir -p doc install repo
 	mv *.html ../$(ARCHIVE)/doc/ #--assuming all generated documentation is .html (i have no idea)
 	cp install uninstall ../$(ARCHIVE)/install/ 
+	cd ../ && cp -r .git .gitignore $(ARCHIVE)/repo
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
 	cd ../$(ARCHIVE) && zip -r ../$(ARCHIVE) doc repo install
 	cd ../ && rm -rf $(ARCHIVE)
