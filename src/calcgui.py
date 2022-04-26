@@ -41,7 +41,7 @@ class CalcGridLayout(GridLayout):
             except ValueError:
                 self.display.text = "MATH ERROR"
                 self.ERR = True
-            except Exception:
+            except IndexError:
                 self.display.text = "INVALID INPUT"
                 self.ERR = True
 
@@ -71,13 +71,15 @@ class CalcGridLayout(GridLayout):
             self.display.text += text
 
 
+# background_color: 0.851, 0.48627, 0, 1
 # Creating App class
 class CalculatorApp(App):
 
     def build(self):
         file = Builder.load_string("""
 # Custom button
-<CustButton@Button>:
+<CalcButton@Button>:
+    background_color: 0, 0.5411, 0.847, 0.7
     font_size: 36
 
     # Defining id of the grid layout
@@ -94,31 +96,37 @@ class CalculatorApp(App):
     # Where input is displayed
     BoxLayout:
         TextInput:
+            cursor_width: 0 
+            background_color: 0, 0.48627, 0.489, 1
             id: entry
-            font_size: 32
+            font_size: 56
             multiline: False
+            on_text_validate: calculator.calculate(entry.text)
+            text_validate_unfocus: False
             focus: True
-            
+
     # First row of buttons          
     BoxLayout:
         spacing: 10
-        CustButton:
+        CalcButton:
+            background_color: 1, 0, 0, 0.85
             text: "AC"
             on_press: calculator.clear()
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 1, 0, 0, 0.85
             text: "DEL"
             on_press: calculator.delete()
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "("
             on_press: calculator.enter("(")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: ")"
             on_press: calculator.enter(")")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "%"
             on_press: calculator.enter("%")
             on_release: entry.focus = True
@@ -126,23 +134,26 @@ class CalculatorApp(App):
     # Second row of buttons
     BoxLayout:
         spacing: 10
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "7"
             on_press: calculator.enter("7")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "8"
             on_press: calculator.enter("8")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "9"
             on_press: calculator.enter("9")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "+"
             on_press: calculator.enter("+")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "-"
             on_press: calculator.enter("-")
             on_release: entry.focus = True
@@ -150,23 +161,26 @@ class CalculatorApp(App):
     # Third row of buttons
     BoxLayout:
         spacing: 10
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "4"
             on_press: calculator.enter("4")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "5"
             on_press: calculator.enter("5")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "6"
             on_press: calculator.enter("6")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "*"
             on_press: calculator.enter("*")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "/"
             on_press: calculator.enter("/")
             on_release: entry.focus = True
@@ -174,23 +188,26 @@ class CalculatorApp(App):
     # Fourth row of buttons
     BoxLayout:
         spacing: 10
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "1"
             on_press: calculator.enter("1")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "2"
             on_press: calculator.enter("2")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "3"
             on_press: calculator.enter("3")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "^"
             on_press: calculator.enter("^")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "√"
             on_press: calculator.enter("√")
             on_release: entry.focus = True
@@ -200,29 +217,32 @@ class CalculatorApp(App):
     # to the calculate function
     BoxLayout:
         spacing: 10
-        CustButton:
+        CalcButton:
             text: "!"
             on_press: calculator.enter("!")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 0, 0.5411, 0.847, 0.9
             text: "0"
             on_press: calculator.enter("0")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "="
             on_press: calculator.calculate(entry.text)
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
             text: "."
             on_press: calculator.enter(".")
             on_release: entry.focus = True
-        CustButton:
+        CalcButton:
+            background_color: 1, 1, 1, 0.5
             text: "HELP"
             on_press: calculator.help()
             on_release: entry.focus = True
 
 """)
         return CalcGridLayout()
+
 
 # Create the App and load the kv file
 # The kv file is a python file that contains the
