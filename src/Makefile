@@ -1,5 +1,5 @@
 IPT =python3
-ARCHIVE =xlogin# add archive name
+ARCHIVE =xkubin27_xkalen07_xstrei06_xmashl00
 
 .PHONY: all run test profile pack clean clear help doc
 .SILENT: help clean
