@@ -15,7 +15,7 @@ test: test_calc.py
 
 #TODO -- fix profiling target 
 profile: profiling.py
-	$(IPT) profiling.py > ../profiling/profile.txt
+	$(IPT) profiling.py
 	
 
 doc: calc.py
