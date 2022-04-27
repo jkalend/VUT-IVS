@@ -34,7 +34,7 @@ packfiles:
 	cd ../ && cp -r .git .gitignore $(ARCHIVE)/repo
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
 	cd ../$(ARCHIVE)/repo/src/ && make clean
-	cd ../$(ARCHIVE) && zip -r ../$(ARCHIVE) doc repo install
+	cd ../$(ARCHIVE) && zip -r ../../$(ARCHIVE) doc repo install
 	cd ../ && rm -rf $(ARCHIVE)
 	
 clear: clean
