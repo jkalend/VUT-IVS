@@ -1,5 +1,5 @@
 IPT =python3
-ARCHIVE =xkubin27_xkalen07_xstrei06_xmashl00
+ARCHIVE =xkalen07_xkubin27_xstrei06_xmashl00
 
 .PHONY: all run test profile pack clean clear help doc
 .SILENT: help clean
@@ -34,7 +34,7 @@ packfiles:
 	cd ../ && cp -r .git .gitignore $(ARCHIVE)/repo
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
 	cd ../$(ARCHIVE)/repo/src/ && make clean
-	cd ../$(ARCHIVE) && zip -r ../../$(ARCHIVE) doc repo install
+	cd ../ && zip -r ../$(ARCHIVE) $(ARCHIVE)
 	cd ../ && rm -rf $(ARCHIVE)
 	
 clear: clean
