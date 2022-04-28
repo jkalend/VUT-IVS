@@ -1,8 +1,8 @@
 import cProfile
 import calc
+import sys
 
-numbers = input()
-numbers = numbers.rstrip().split()
+numbers = sys.stdin.read().rstrip().split()
 
 profile = cProfile.Profile()
 profile.enable()
@@ -14,7 +14,6 @@ for num in numbers:
     sum_x = calc.eval_str(f"{num}^2 + {str(sum_x)}")
 
 sum = calc.eval_str(f"({str(sum)}/{len(numbers)})^2 * {len(numbers)}")
-
 
 print(calc.eval_str(f"√((1/({len(numbers)} - 1)) * ({str(sum_x)} - {str(sum)}))"))
 
