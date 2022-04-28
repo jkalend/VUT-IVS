@@ -1,0 +1,38 @@
+#!/bin/bash
+
+ipt="python3"
+
+echo "installing dependencies..."
+sudo apt install python3-pip xclip python-dev-is-python3 && $ipt -m pip install kivy
+if [[ $? -eq 1 ]]; then
+    echo "failed to load dependencies, quitting"; exit 1
+fi
+
+echo "creating application launcher..."
+launcher="calc_launcher"
+work_dir=$(pwd)
+dir="$work_dir/../repo/src"
+icon="button.png"
+encoding="UTF-8"
+executable="calcgui.py"
+name="Supreme Calc"
+version=1.0
+type="Application"
+terminal="false"
+comment="A very very good calculator"
+
+echo "[Desktop Entry]" > $launcher.desktop
+echo "Encoding = $encoding" >> $launcher.desktop
+echo "Name = $name" >> $launcher.desktop
+echo "Icon = $dir/$icon" >> $launcher.desktop
+echo "Exec = $ipt $dir/$executable" >> $launcher.desktop
+echo "Version = $version" >> $launcher.desktop
+echo "Type = $type" >> $launcher.desktop
+echo "Terminal = $terminal" >> $launcher.desktop
+echo "Comment = $comment" >> $launcher.desktop
+
+mv $launcher.desktop ~/.local/share/applications/
+
+printf "Launch application? [y/n] "
+read ans
+[[ $ans == "y" || $ans == "Y" || $ans == "yes" ]] && $ipt $dir/$executable &> /dev/null

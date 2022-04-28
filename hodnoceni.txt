@@ -1,0 +1,4 @@
+xkalen07 105 (GUI)
+xkubin27 125 (matematická knihovna, installer)
+xstrei06 80 (testy, dokumentace)
+xmashl00 90 (testy, profiling)
