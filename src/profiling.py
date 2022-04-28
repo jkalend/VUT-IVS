@@ -23,7 +23,7 @@ def std(list_numbers):
         a = calc.add(a, calc.exp(int(number), 2))
 
     b = calc.mult(len(list_numbers), calc.exp(div_2(list_numbers), 2))
-    s = calc.root(calc.div(calc.sub(a, b), calc.sub(len(list_numbers), 1)), 2)
+    s = calc.root(2, calc.div(calc.sub(a, b), calc.sub(len(list_numbers), 1)))
     return s
 
 
