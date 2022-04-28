@@ -3,7 +3,7 @@
 ipt="python3"
 
 echo "installing dependencies..."
-sudo apt install python3-pip xclip && $ipt -m pip install kivy
+sudo apt install python3-pip xclip python-dev-is-python3 && $ipt -m pip install kivy
 if [[ $? -eq 1 ]]; then
     echo "failed to load dependencies, quitting"; exit 1
 fi
