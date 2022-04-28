@@ -1,7 +1,7 @@
 #!usr/bin/python
 
 
-
+import os
 # import kivy module
 import kivy
 # import calculator math library
@@ -23,6 +23,7 @@ kivy.require('2.1.0')
 
 # Setting size to resizable
 Config.set('graphics', 'resizable', 1)
+Config.set('kivy',"window_icon", os.path.dirname(os.path.abspath(__file__)) + "button.png")
 
 
 # Creating Layout class
@@ -30,7 +31,7 @@ class CalcGridLayout(GridLayout):
     # variable indicating whether to clear the display or not
     ERR = False
 
-    path = '../dokumentace.pdf'
+    path = os.path.dirname(os.path.abspath(__file__)) + '/../dokumentace.pdf'
 
     # Function called when "=" is pressed
     def calculate(self, calculation):
