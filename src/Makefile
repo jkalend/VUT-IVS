@@ -13,9 +13,8 @@ run: calcgui.py
 test: test_calc.py
 	$(IPT) test_calc.py 
 
-#TODO -- fix profiling target 
 profile: profiling.py
-	$(IPT) profiling.py
+	$(IPT) profiling.py < ../profiling/"vstup 1000.txt"
 	
 
 doc: calc.py
@@ -25,7 +24,6 @@ help:
 	echo "run installation script from the install directory using ./install"
 	echo "uninstall the application using the uninstall script in the same directory using ./uninstall"
 
-#TODO -- generate doc and run profiling beforehand
 pack: all doc packfiles 
 packfiles:
 	cd ../ && mkdir -p $(ARCHIVE) && cd $(ARCHIVE) && mkdir -p doc install repo
