@@ -28,7 +28,6 @@ pack: all doc packfiles
 packfiles:
 	cd ../ && mkdir -p $(ARCHIVE) && cd $(ARCHIVE) && mkdir -p doc install repo
 	mv *.html ../$(ARCHIVE)/doc/
-	cp ../dokumentace.pdf ../$(ARCHIVE)/doc
 	cp install uninstall ../$(ARCHIVE)/install/ 
 	cd ../ && cp -r .git .gitignore $(ARCHIVE)/repo
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
