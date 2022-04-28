@@ -1,37 +1,23 @@
-import calc
 import cProfile
+import calc
+
+numbers = input()
+numbers = numbers.rstrip().split()
 
 profile = cProfile.Profile()
 profile.enable()
 
-# sum of all x
-def sum(list_numbers):
-    total = 0
-    for number in list_numbers:
-        total = calc.add(total, int(number))
-    return total
+sum = 0
+sum_x = 0
+for num in numbers:
+    sum = calc.eval_str(f"{str(sum)} + {num}")
+    sum_x = calc.eval_str(f"{num}^2 + {str(sum_x)}")
+
+sum = calc.eval_str(f"({str(sum)}/{len(numbers)})^2 * {len(numbers)}")
 
 
-# (sum of all x / N)
-def div_2(list_numbers):
-    return sum(list_numbers) / len(list_numbers)
+print(calc.eval_str(f"√((1/({len(numbers)} - 1)) * ({str(sum_x)} - {str(sum)}))"))
 
-
-def std(list_numbers):
-    a = 0
-    for number in list_numbers:
-        a = calc.add(a, calc.exp(int(number), 2))
-
-    b = calc.mult(len(list_numbers), calc.exp(div_2(list_numbers), 2))
-    s = calc.root(2, calc.div(calc.sub(a, b), calc.sub(len(list_numbers), 1)))
-    return s
-
-
-if __name__ == "__main__":
-    string_input = input()
-    num_list = string_input.replace("\t", " ").replace("\n", " ").split(" ")
-    deviation = std(num_list)
-    print(deviation)
 
 profile.disable()
 profile.print_stats(sort='time')
