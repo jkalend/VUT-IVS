@@ -23,7 +23,7 @@ kivy.require('2.1.0')
 
 # Setting size to resizable
 Config.set('graphics', 'resizable', 1)
-Config.set('kivy',"window_icon", os.path.dirname(os.path.abspath(__file__)) + "button.png")
+Config.set('kivy', 'window_icon', os.path.dirname(os.path.abspath(__file__)) + 'button.png')
 
 
 # Creating Layout class
