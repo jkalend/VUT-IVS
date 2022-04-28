@@ -28,6 +28,7 @@ pack: all doc packfiles
 packfiles:
 	cd ../ && mkdir -p $(ARCHIVE) && cd $(ARCHIVE) && mkdir -p doc install repo
 	mv *.html ../$(ARCHIVE)/doc/
+	cp ../dokumentace.pdf ../$(ARCHIVE)/doc
 	cp install uninstall ../$(ARCHIVE)/install/ 
 	cd ../ && cp -r .git .gitignore $(ARCHIVE)/repo
 	cd ../ && cp -R `ls | grep -v $(ARCHIVE)` $(ARCHIVE)/repo/ 
@@ -37,5 +38,5 @@ packfiles:
 	
 clear: clean
 clean:
-	rm -rf __pycache__ __init__.py calc.html
+	rm -rf __pycache__ __init__.py *.html *.prof
 	
