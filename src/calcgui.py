@@ -1,5 +1,7 @@
 #!usr/bin/python
 
+
+
 # import kivy module
 import kivy
 # import calculator math library
@@ -28,7 +30,7 @@ class CalcGridLayout(GridLayout):
     # variable indicating whether to clear the display or not
     ERR = False
 
-    path = 'manual.pdf'
+    path = '../dokumentace.pdf'
 
     # Function called when "=" is pressed
     def calculate(self, calculation):
@@ -74,8 +76,10 @@ class CalcGridLayout(GridLayout):
 # background_color: 0.851, 0.48627, 0, 1
 # Creating App class
 class CalculatorApp(App):
+    title = "Supreme Calc"
 
     def build(self):
+        self.icon = "button.png"
         file = Builder.load_string("""
 # Custom button
 <CalcButton@Button>:
@@ -96,7 +100,7 @@ class CalculatorApp(App):
     # Where input is displayed
     BoxLayout:
         TextInput:
-            cursor_width: 0 
+            cursor_width: 2 
             background_color: 0, 0.48627, 0.489, 1
             id: entry
             font_size: 56
