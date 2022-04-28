@@ -3,7 +3,7 @@ import unittest
 # sys.path.append('../')
 
 # import src.calc as calc
-
+import calc
 
 class TestCalc(unittest.TestCase):
 
